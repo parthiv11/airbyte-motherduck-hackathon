@@ -8,12 +8,14 @@ export const Search = ({
   setInputValue,
   submitted,
   handleClear,
+  disabled,
 }: {
   handleSubmit: () => Promise<void>;
   inputValue: string;
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
   submitted: boolean;
   handleClear: () => void;
+  disabled: boolean;
 }) => {
   return (
     <form
@@ -27,10 +29,12 @@ export const Search = ({
         <div className="relative flex-grow">
           <Input
             type="text"
-            placeholder="🦆Q̶u̶a̶c̶k Talk to Motherduck..."
+            placeholder={disabled?"🦆fetching databases, Please wait...": "🦆Q̶u̶a̶c̶k Talk to Motherduck..."}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             className="pr-10 text-base"
+            autoFocus
+            disabled={disabled}
           />
           <SearchIcon className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
         </div>
