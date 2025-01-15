@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { generateChartConfig } from "./actions";
 import { Config, Result } from "@/lib/types";
@@ -23,8 +23,34 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState(1);
   const [chartConfig, setChartConfig] = useState<Config | null>(null);
+  const [databases, setDatabases] = useState<string[]>([]);
+  const [selectedDatabase, setSelectedDatabase] = useState<string>("");
+  const [isFetchingDatabases, setIsFetchingDatabases] = useState(false);
 
   const { evaluateQuery } = useMotherDuckClientState();
+
+  useEffect(() => {
+    const fetchDatabases = async () => {
+      try {
+        setIsFetchingDatabases(true);
+        const queryResponse = await evaluateQuery("SHOW DATABASES;");
+        const dbList = queryResponse.data
+          .toRows()
+          .map((row) => row["database_name"])
+          .filter((db) => db !== "memory" && db !== "md_information_schema"); // Filter out memory and md_information_schema
+
+        setDatabases(dbList);
+        setSelectedDatabase(dbList[0] || "");
+        setIsFetchingDatabases(false);
+      } catch (error) {
+        toast.error("Failed to fetch databases.");
+        setIsFetchingDatabases(false);
+      }
+    };
+
+    fetchDatabases();
+  }, [evaluateQuery]);
+
 
   const handleSubmit = async (suggestion?: string) => {
     const question = suggestion ?? inputValue;
@@ -38,7 +64,8 @@ export default function Page() {
     setActiveQuery("");
     
     try {
-      const queryResponse = await evaluateQuery(`call prompt_sql("${question}");`);
+      await evaluateQuery(`USE ${selectedDatabase};`);
+      const queryResponse = await evaluateQuery(`CALL prompt_sql("${question}");`);
       const query = queryResponse.data.toRows()[0].query as string;
   
       if (!query) {
@@ -100,6 +127,33 @@ export default function Page() {
         >
           <div className="p-6 sm:p-8 flex flex-col flex-grow">
             <Header handleClear={handleClear} />
+            <div className="mb-4">
+  <label htmlFor="database-selector" className="block mb-2 font-semibold">
+    Select Database:
+  </label>
+  <div className="relative">
+    {isFetchingDatabases ? (
+      <div className="absolute inset-0 flex items-center justify-center space-x-2">
+        <span className="text-3xl">🦆</span>
+        <p className="text-lg">fetching databases, Please wait...</p>
+      </div>
+    ) : null}
+    <select
+      id="database-selector"
+      value={selectedDatabase}
+      onChange={(e) => setSelectedDatabase(e.target.value)}
+      className="w-auto p-2 border rounded"
+    >
+      {databases.map((db) => (
+        <option key={db} value={db}>
+          {db}
+        </option>
+      ))}
+    </select>
+  </div>
+</div>
+
+
             <Search
               handleClear={handleClear}
               handleSubmit={handleSubmit}

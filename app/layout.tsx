@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${GeistMono.className} ${GeistSans.className}`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <MotherDuckClientProvider  database="sample_data">
+          <MotherDuckClientProvider >
             {children}
           </MotherDuckClientProvider>
         </ThemeProvider>

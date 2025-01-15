@@ -27,7 +27,7 @@ export const Search = ({
         <div className="relative flex-grow">
           <Input
             type="text"
-            placeholder="Ask about startup unicorns..."
+            placeholder="🦆Q̶u̶a̶c̶k Talk to Motherduck..."
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             className="pr-10 text-base"
