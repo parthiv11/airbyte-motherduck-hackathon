@@ -5,7 +5,7 @@ import { GeistSans } from "geist/font/sans";
 import { ThemeProvider } from "next-themes";
 
 export const metadata = {
-  metadataBase: new URL("https://natural-language-postgres.vercel.app"),
+  metadataBase: new URL("https://airbyte-motherduck-hackathon.vercel.app/"),
   title: "Natural Language MotherDuck",
   description:
     "Chat with a MotherDuck database using natural language powered by the AI SDK by Vercel.",
