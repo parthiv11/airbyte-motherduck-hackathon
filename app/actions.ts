@@ -78,7 +78,6 @@ export const generateChartConfig = async (
     const updatedConfig: Config = { ...config, colors };
     return { config: updatedConfig };
   } catch (e) {
-    // @ts-expect-errore
     console.error(e);
     throw new Error("Failed to generate chart suggestion");
   }
