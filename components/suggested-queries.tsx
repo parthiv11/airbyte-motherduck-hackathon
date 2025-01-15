@@ -7,53 +7,69 @@ export const SuggestedQueries = ({
   handleSuggestionClick: (suggestion: string) => void;
 }) => {
   const suggestionQueries = [
+    
     {
-      desktop: "Compare count of unicorns in SF and NY over time",
-      mobile: "SF vs NY",
+      desktop: "Most upvoted posts on Hacker News over time",
+      mobile: "Top posts (HN)",
     },
     {
-      desktop: "Compare unicorn valuations in the US vs China over time",
-      mobile: "US vs China",
+      desktop: "Get top comments for a post on Hacker News",
+      mobile: "Top comments (HN)",
     },
     {
-      desktop: "Countries with highest unicorn density",
-      mobile: "Top countries",
+      desktop: "Posts with the highest score in the last 24 hours",
+      mobile: "High score posts",
     },
     {
-      desktop:
-        "Show the number of unicorns founded each year over the past two decades",
-      mobile: "Yearly count",
+      desktop: "Most commented posts in the last week",
+      mobile: "Top commented posts",
+    },
+
+    {
+      desktop: "Show the total number of complaints by type in NYC",
+      mobile: "NYC requests by type",
     },
     {
-      desktop: "Display the cumulative total valuation of unicorns over time",
-      mobile: "Total value",
+      desktop: "Get the most common complaint types in NYC",
+      mobile: "Common complaints in NYC",
     },
     {
-      desktop:
-        "Compare the yearly funding amounts for fintech vs healthtech unicorns",
-      mobile: "Fintech vs health",
+      desktop: "Get the most common complaint types by year",
+      mobile: "Common complaints by year",
+    },
+
+    {
+      desktop: "Show average movie rating by genre",
+      mobile: "Avg rating by genre",
     },
     {
-      desktop: "Which cities have with most SaaS unicorns",
-      mobile: "SaaS cities",
+      desktop: "Top 10 highest-rated movies of all time",
+      mobile: "Top rated movies",
     },
     {
-      desktop: "Show the countries with highest unicorn density",
-      mobile: "Dense nations",
+      desktop: "Show the most common keywords in movie descriptions",
+      mobile: "Common movie keywords",
     },
     {
-      desktop:
-        "Show the number of unicorns (grouped by year) over the past decade",
-      mobile: "Decade trend",
+      desktop: "Get movies with the highest earnings by genre",
+      mobile: "Top earning genres",
+    },
+
+    {
+      desktop: "Compare PM10 and PM2.5 concentration by city",
+      mobile: "PM10 vs PM2.5 by city",
     },
     {
-      desktop:
-        "Compare the average valuation of AI companies vs. biotech companies",
-      mobile: "AI vs biotech",
+      desktop: "Show air quality trends for major cities in 2020",
+      mobile: "Air quality trends 2020",
     },
     {
-      desktop: "Investors with the most unicorns",
-      mobile: "Top investors",
+      desktop: "Top cities with the highest NO2 concentration",
+      mobile: "Cities with high NO2",
+    },
+    {
+      desktop: "Show air quality data for countries by year",
+      mobile: "Air quality by country",
     },
   ];
 

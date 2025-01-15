@@ -251,14 +251,12 @@ export default function Page() {
                         />
                       )}
                       {loading ? (
-                        <div className="h-full absolute bg-background/50 w-full flex flex-col items-center justify-center space-y-4">
-                          <Loader2 className="h-12 w-12 animate-spin text-muted-foreground" />
-                          <p className="text-foreground">
-                            {loadingStep === 1
-                              ? "Generating SQL query..."
-                              : "Running SQL query..."}
-                          </p>
-                        </div>
+                        <div className="h-full w-full absolute inset-0 bg-background/50 flex items-center justify-center space-y-4">
+                        <Loader2 className="h-12 w-12 animate-spin text-muted-foreground" />
+                        <p className="text-foreground">
+                          {loadingStep === 1 ? "Generating SQL query..." : "Running SQL query..."}
+                        </p>
+                      </div>
                       ) : results.length === 0 ? (
                         <div className="flex-grow flex items-center justify-center">
                           <p className="text-center text-muted-foreground">
