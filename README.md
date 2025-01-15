@@ -64,7 +64,6 @@ Welcome to **Natural Language MotherDuck**, a Next.js-powered web app transformi
 
 3. Add API keys:  
    ```bash
-   OPENAI_API_KEY=your_api_key_here
    motherduck_token=your_motherduck_token_here
    ```
 
