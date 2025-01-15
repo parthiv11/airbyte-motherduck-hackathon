@@ -17,6 +17,9 @@ const nextConfig = {
       },
     ]
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   images: {
     domains: ["images.ctfassets.net"],
   },

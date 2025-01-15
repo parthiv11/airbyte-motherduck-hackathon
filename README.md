@@ -75,7 +75,9 @@ Welcome to **Natural Language MotherDuck**, a Next.js-powered web app transformi
 Visit [http://localhost:3000](http://localhost:3000)—your data quackery awaits! 🦆  
 
 ---
-
+## Demo
+https://www.loom.com/share/212872baca1c42f088d5b36fde7edeec?from_recorder=1&focus_title=1
+---
 ## 🌐 Learn More  
 
 - [Next.js](https://nextjs.org/docs)  
