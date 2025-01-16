@@ -2,7 +2,7 @@
 
 import { fetchMotherDuckToken } from "@/lib/motherduck/functions/fetchMotherDuckToken";
 import initMotherDuckConnection from "@/lib/motherduck/functions/initMotherDuckConnection";
-import type { MaterializedQueryResult, MDConnection, SafeQueryResult } from "@motherduck/wasm-client";
+import type { MaterializedQueryResult, MDConnection, SafeQueryResult, AsyncPreparedStatement } from "@motherduck/wasm-client";
 import 'core-js/actual/promise/with-resolvers';
 import { createContext, useContext, useEffect, useMemo, useRef } from "react";
 
@@ -10,7 +10,7 @@ import { createContext, useContext, useEffect, useMemo, useRef } from "react";
 interface MotherDuckContextValue {
   evaluateQuery: (query: string) => Promise<MaterializedQueryResult>;
   safeEvaluateQuery: (query: string) => Promise<SafeQueryResult<MaterializedQueryResult>>;
-
+  evaluatePreparedStatement: (query: string, params: any[]) => Promise<MaterializedQueryResult>;
 }
 
 export const MotherDuckContext = createContext<MotherDuckContextValue | null>(null);
@@ -24,7 +24,7 @@ export function MotherDuckClientProvider({ children, database }: { children: Rea
 
   const evaluateQuery = async (query: string): Promise<MaterializedQueryResult> => {
     if (!connectionRef.current) {
-      throw new Error('MotherDuck connection ref is falsy')
+      throw new Error('MotherDuck connection ref is falsy');
     }
 
     const connection = await connectionRef.current.promise;
@@ -38,7 +38,7 @@ export function MotherDuckClientProvider({ children, database }: { children: Rea
 
   const safeEvaluateQuery = async (query: string): Promise<SafeQueryResult<MaterializedQueryResult>> => {
     if (!connectionRef.current) {
-      throw new Error('MotherDuck connection ref is falsy')
+      throw new Error('MotherDuck connection ref is falsy');
     }
 
     const connection = await connectionRef.current.promise;
@@ -48,6 +48,20 @@ export function MotherDuckClientProvider({ children, database }: { children: Rea
     }
 
     return connection.safeEvaluateQuery(query);
+  };
+
+  const evaluatePreparedStatement = async (query: string, params: any[]): Promise<MaterializedQueryResult> => {
+    if (!connectionRef.current) {
+      throw new Error('MotherDuck connection ref is falsy');
+    }
+
+    const connection = await connectionRef.current.promise;
+
+    if (!connection) {
+      throw new Error('No MotherDuck connection available');
+    }
+
+    return connection.evaluatePreparedStatement(query, params);
   };
 
   useEffect(() => {
@@ -70,8 +84,8 @@ export function MotherDuckClientProvider({ children, database }: { children: Rea
   const value = useMemo(() => ({
     evaluateQuery,
     safeEvaluateQuery,
+    evaluatePreparedStatement,
   }), []);
-
 
   return (
     <MotherDuckContext.Provider value={value}>
@@ -83,7 +97,7 @@ export function MotherDuckClientProvider({ children, database }: { children: Rea
 export function useMotherDuckClientState() {
   const context = useContext(MotherDuckContext);
   if (!context) {
-    throw new Error('useMotherDuckClientState must be used within MotherDuckClientStateProvider');
+    throw new Error('useMotherDuckClientState must be used within MotherDuckClientProvider');
   }
   return context;
 }
