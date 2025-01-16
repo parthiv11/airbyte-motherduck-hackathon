@@ -76,7 +76,9 @@ Visit [http://localhost:3000](http://localhost:3000)—your data quackery awaits
 
 ---
 ## Demo
-https://www.loom.com/share/212872baca1c42f088d5b36fde7edeec?from_recorder=1&focus_title=1
+https://www.loom.com/share/212872baca1c42f088d5b36fde7edeec
+
+[Blog](https://parthiv11.hashnode.dev/natural-language-motherduck)
 ---
 ## 🌐 Learn More  
 
