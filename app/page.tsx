@@ -92,7 +92,7 @@ export default function Page() {
       setLoading(false);
       const graphQuery = `SELECT prompt(
         'Given the following data from a SQL query result, generate the chart config that best visualises the data and answers the user''s query. For multiple groups, use multi-lines.
-        consider to column names as keys .
+        
       
          Example config:
          export const chartConfig = {
@@ -109,9 +109,6 @@ export default function Page() {
       
          User Query:
           ${question} 
-
-        SQL Query:
-          ${query}
 
          Head Data:(having the first 2 rows of the data with the columns)
           ${JSON.stringify(serializeWithBigInt(data.slice(0, 2)), null, 2)}',
